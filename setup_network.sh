@@ -10,6 +10,8 @@ NODEOS_PID=$!
 
 sleep 10
 
+cleos -u http://127.0.0.1:8888 get info
+
 cleos wallet unlock -n devnet --password "PW5Hxdf5mWNSxoWH5UdxPdv9LcsR2hEUFxn1CjLp1NvizzCZ4Cr5i"
 
 cleos create account eosio eosio.token EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
@@ -22,6 +24,7 @@ cleos create account eosio eosio.ramfee EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHV
 cleos create account eosio eosio.rex EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.saving EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.stake EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
+cleos create account eosio eosio.snark EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 
 curl -X POST http://127.0.0.1:8888/v1/producer/schedule_protocol_feature_activations -d '{"protocol_features_to_activate": ["0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd"]}' | jq
 
@@ -53,6 +56,12 @@ cd $OG_DIR
 
 cleos push action eosio init '[0,"4,TLOS"]' -p eosio@active
 sleep 6
+
+cd contracts/snarktor
+cleos set contract eosio.snark . ./snarktor_receiver_contract.wasm ./snarktor_receiver_contract.abi
+cd $OG_DIR
+
+sleep 5
 
 kill $NODEOS_PID
 sleep 10
