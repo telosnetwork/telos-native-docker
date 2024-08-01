@@ -65,3 +65,10 @@ sleep 5
 
 kill $NODEOS_PID
 sleep 10
+
+# Compress the data directory using the -S (sparse) flag to reduce the size of the image
+#  It is extracted before starting nodeos in the entrypoint.sh script
+cd /node
+tar -cSvzf data-dir.tar.gz ./data-dir
+rm -rf data-dir
+cd $OG_DIR

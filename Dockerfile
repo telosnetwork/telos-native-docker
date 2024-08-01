@@ -20,5 +20,7 @@ COPY contracts /app/contracts
 
 RUN bash /app/setup_network.sh
 
+COPY entrypoint.sh /app/entrypoint.sh
 
-CMD ["nodeos", "--data-dir=/node/data-dir", "--config-dir=/node", "--enable-stale-production", "--genesis-json=/node/genesis.json"]
+#CMD ["nodeos", "--data-dir=/node/data-dir", "--config-dir=/node", "--enable-stale-production", "--genesis-json=/node/genesis.json"]
+CMD ["./entrypoint.sh"]
