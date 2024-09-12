@@ -61,9 +61,37 @@ cd $OG_DIR
 cleos push action eosio init '[0,"4,TLOS"]' -p eosio@active
 sleep 6
 
-cd contracts/snarktor
+echo -e "\n\n\nBUILD: Creating Alice account (private key 5KWu5C8FDdNcoCLta3hXuyDKJcxAgaaza3MLkwRJWwEz9C2dn5u)"
+cleos system newaccount eosio alice EOS77jzbmLuakAHpm2Q5ew8EL7Y7gGkfSzqJCmCNDDXWEsBP3xnDc EOS77jzbmLuakAHpm2Q5ew8EL7Y7gGkfSzqJCmCNDDXWEsBP3xnDc --stake-net "1000.0000 TLOS" --stake-cpu "1000.0000 TLOS" --buy-ram "5000.0000 TLOS" --transfer
+cleos wallet import -n devnet --private-key 5KWu5C8FDdNcoCLta3hXuyDKJcxAgaaza3MLkwRJWwEz9C2dn5u
+
+echo -e "\n\n\nBUILD: Creating Bob account (private key 5JrTaBsS6q6Nt1GJA8r19H8CGg2eHq2oTneZ9md9AhjCEBpLHNJ)"
+cleos system newaccount eosio bob EOS6M6T6yDyzjF2ockZQgW7JHx5pGojRdXUHn4qfsqApJinbQj3pd EOS6M6T6yDyzjF2ockZQgW7JHx5pGojRdXUHn4qfsqApJinbQj3pd --stake-net "1000.0000 TLOS" --stake-cpu "1000.0000 TLOS" --buy-ram "5000.0000 TLOS" --transfer
+cleos wallet import -n devnet --private-key 5JrTaBsS6q6Nt1GJA8r19H8CGg2eHq2oTneZ9md9AhjCEBpLHNJ
+
+cd contracts/eosio.snarktor_receiver
+echo -e "\n\n\nBUILD: Deploying SNARKtor receiver contract"
 cleos set contract eosio.snark . ./snarktor_receiver_contract.wasm ./snarktor_receiver_contract.abi
 cd $OG_DIR
+
+cd contracts/eosio.snarktor_goldilocks_verifier
+echo -e "\n\n\nBUILD: Deploying SNARKtor Goldilocks verifier contract"
+cleos set contract eosio.goldv . ./snarktor_goldilocks_verifier_contract.wasm ./snarktor_goldilocks_verifier_contract.abi
+cd $OG_DIR
+
+cd contracts/eosio.plonky
+echo -e "\n\n\nBUILD: Deploying SNARKtor Plonky2 Battleship contract"
+cleos set contract eosio.plonky . ./plonky2_battleship_contract.wasm ./plonky2_battleship_contract.abi
+cd $OG_DIR
+
+# For more info take a look here: https://github.com/uuosio/rscdk/blob/main/examples/token/lib.rs
+cd contracts/eosio.ftoken
+echo -e "\n\n\nBUILD: Deploying eosio.ftoken contract"
+cleos set contract eosio.ftoken . ./token.wasm ./token.abi
+cd $OG_DIR
+
+# Give permission to snarktor-receiver-contract to make external inline action
+cleos set account permission eosio.snark active --add-code
 
 sleep 5
 
