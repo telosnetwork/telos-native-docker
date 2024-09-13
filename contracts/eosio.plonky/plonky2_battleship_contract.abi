@@ -1,0 +1,221 @@
+{
+  "version": "eosio::abi/1.1",
+  "types": [],
+  "structs": [
+    {
+      "name": "GameStateTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "name"
+        },
+        {
+          "name": "next_turn",
+          "type": "uint32"
+        },
+        {
+          "name": "p1",
+          "type": "PlayerState"
+        },
+        {
+          "name": "p2",
+          "type": "PlayerState"
+        },
+        {
+          "name": "last_hit",
+          "type": "uint8"
+        },
+        {
+          "name": "sunk_what",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "PlayerState",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "name"
+        },
+        {
+          "name": "board",
+          "type": "bytes"
+        },
+        {
+          "name": "shot_x",
+          "type": "uint8"
+        },
+        {
+          "name": "shot_y",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "Proof",
+      "base": "",
+      "fields": [
+        {
+          "name": "proof_id",
+          "type": "uint64"
+        },
+        {
+          "name": "proof_digest",
+          "type": "checksum256"
+        },
+        {
+          "name": "proof_input",
+          "type": "uint64[]"
+        }
+      ]
+    },
+    {
+      "name": "clear",
+      "base": "",
+      "fields": [
+        {
+          "name": "game",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "clearall",
+      "base": "",
+      "fields": [
+        {
+          "name": "count",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "joingame",
+      "base": "",
+      "fields": [
+        {
+          "name": "game_name",
+          "type": "name"
+        },
+        {
+          "name": "player_two",
+          "type": "name"
+        },
+        {
+          "name": "snarktor_receipt_data",
+          "type": "bytes"
+        },
+        {
+          "name": "initial_state_data",
+          "type": "bytes"
+        },
+        {
+          "name": "shot_x",
+          "type": "uint8"
+        },
+        {
+          "name": "shot_y",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "newgame",
+      "base": "",
+      "fields": [
+        {
+          "name": "game_name",
+          "type": "name"
+        },
+        {
+          "name": "player_one",
+          "type": "name"
+        },
+        {
+          "name": "snarktor_receipt_data",
+          "type": "bytes"
+        },
+        {
+          "name": "initial_state_data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "turn",
+      "base": "",
+      "fields": [
+        {
+          "name": "snarktor_receipt_data",
+          "type": "bytes"
+        },
+        {
+          "name": "round_commit_data",
+          "type": "bytes"
+        },
+        {
+          "name": "game_name",
+          "type": "name"
+        },
+        {
+          "name": "shot_x",
+          "type": "uint8"
+        },
+        {
+          "name": "shot_y",
+          "type": "uint8"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "clear",
+      "type": "clear",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "clearall",
+      "type": "clearall",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "joingame",
+      "type": "joingame",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "newgame",
+      "type": "newgame",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "turn",
+      "type": "turn",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [
+    {
+      "name": "games",
+      "type": "GameStateTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    },
+    {
+      "name": "proofs",
+      "type": "Proof",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    }
+  ],
+  "variants": [],
+  "abi_extensions": [],
+  "error_messages": [],
+  "ricardian_clauses": []
+}
