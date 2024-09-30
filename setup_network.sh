@@ -28,7 +28,6 @@ cleos create account eosio eosio.snark EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVw
 cleos create account eosio eosio.plonky EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.goldv EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.agg EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
-cleos create account eosio eosio.ftoken EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 
 curl -X POST http://127.0.0.1:8888/v1/producer/schedule_protocol_feature_activations -d '{"protocol_features_to_activate": ["0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd"]}' | jq
 
@@ -82,12 +81,6 @@ cd $OG_DIR
 cd contracts/eosio.plonky
 echo -e "\n\n\nBUILD: Deploying SNARKtor Plonky2 Battleship contract"
 cleos set contract eosio.plonky . ./plonky2_battleship_contract.wasm ./plonky2_battleship_contract.abi
-cd $OG_DIR
-
-# For more info take a look here: https://github.com/uuosio/rscdk/blob/main/examples/token/lib.rs
-cd contracts/eosio.ftoken
-echo -e "\n\n\nBUILD: Deploying eosio.ftoken contract"
-cleos set contract eosio.ftoken . ./token.wasm ./token.abi
 cd $OG_DIR
 
 # Give permission to snarktor-receiver-contract to make external inline action
