@@ -25,9 +25,10 @@ cleos create account eosio eosio.rex EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5
 cleos create account eosio eosio.saving EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.stake EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.snark EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
-cleos create account eosio eosio.plonky EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.goldv EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 cleos create account eosio eosio.agg EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
+cleos create account eosio eosio.risc EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
+cleos create account eosio eosio.plonky EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6 EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 
 curl -X POST http://127.0.0.1:8888/v1/producer/schedule_protocol_feature_activations -d '{"protocol_features_to_activate": ["0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd"]}' | jq
 
@@ -76,11 +77,6 @@ cd $OG_DIR
 cd contracts/eosio.snarktor_goldilocks_verifier
 echo -e "\n\n\nBUILD: Deploying SNARKtor Goldilocks verifier contract"
 cleos set contract eosio.goldv . ./snarktor_goldilocks_verifier_contract.wasm ./snarktor_goldilocks_verifier_contract.abi
-cd $OG_DIR
-
-cd contracts/eosio.plonky
-echo -e "\n\n\nBUILD: Deploying SNARKtor Plonky2 Battleship contract"
-cleos set contract eosio.plonky . ./plonky2_battleship_contract.wasm ./plonky2_battleship_contract.abi
 cd $OG_DIR
 
 # Give permission to snarktor-receiver-contract to make external inline action
